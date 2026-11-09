@@ -1,10 +1,412 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mundo Digital Jere — Sites e sistemas web sob medida</title>
+  <meta name="description" content="Desenvolvimento de sites e pequenos sistemas web sob medida para pequenos negócios. Por Ancelmo, em Jeremoabo/BA." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #020F1F;
+      --bg-soft: #061a30;
+      --royal: #2869C7;
+      --electric: #438DEB;
+      --purple: #8B65D9;
+      --coral: #D84D65;
+      --ice: #F4F5FA;
+      --muted: #9db0c8;
+      --radius: 14px;
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--ice);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--electric); text-decoration: none; }
+    a:hover { color: var(--ice); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+    section { padding: 80px 0; }
+    h1, h2, h3 { line-height: 1.2; letter-spacing: -0.02em; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin-bottom: 12px; }
+    .section-sub { color: var(--muted); max-width: 620px; margin-bottom: 40px; }
+    .eyebrow {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--electric); margin-bottom: 12px;
+    }
+
+    /* NAV */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(2, 15, 31, 0.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(67, 141, 235, 0.15);
+    }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0;
+    }
+    .brand { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.02em; }
+    .brand small { font-weight: 500; color: var(--muted); font-size: 0.75rem; margin-left: 4px; }
+    .nav-links { display: flex; gap: 28px; font-size: 0.92rem; }
+    .nav-links a { color: var(--muted); font-weight: 500; }
+    .nav-links a:hover { color: var(--ice); }
+    .menu-toggle { display: none; background: none; border: 0; color: var(--ice); font-size: 1.5rem; cursor: pointer; }
+
+    /* HERO */
+    .hero {
+      padding: 110px 0 90px;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(40, 105, 199, 0.25), transparent 45%),
+        radial-gradient(circle at 85% 30%, rgba(139, 101, 217, 0.18), transparent 40%);
+      border-bottom: 1px solid rgba(67, 141, 235, 0.12);
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5.5vw, 3.4rem);
+      font-weight: 800; max-width: 820px; margin-bottom: 20px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(90deg, var(--electric), var(--purple));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem); color: var(--muted);
+      max-width: 620px; margin-bottom: 36px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 26px; border-radius: 999px;
+      font-weight: 600; font-size: 0.98rem;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--royal), var(--electric));
+      color: #fff; box-shadow: 0 8px 24px rgba(67, 141, 235, 0.35);
+    }
+    .btn-primary:hover { transform: translateY(-2px); color: #fff; box-shadow: 0 12px 30px rgba(67, 141, 235, 0.5); }
+    .btn-ghost {
+      border: 1px solid rgba(67, 141, 235, 0.4); color: var(--ice);
+    }
+    .btn-ghost:hover { border-color: var(--electric); }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* SERVIÇOS */
+    .grid-3 {
+      display: grid; gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      background: linear-gradient(160deg, var(--bg-soft), rgba(6, 26, 48, 0.4));
+      border: 1px solid rgba(67, 141, 235, 0.18);
+      border-radius: var(--radius); padding: 30px 26px;
+      transition: border-color .2s, transform .2s;
+    }
+    .card:hover { border-color: rgba(67, 141, 235, 0.5); transform: translateY(-3px); }
+    .card .icon {
+      width: 46px; height: 46px; border-radius: 12px;
+      display: grid; place-items: center; margin-bottom: 18px;
+      background: rgba(67, 141, 235, 0.12);
+      color: var(--electric); font-size: 1.3rem;
+    }
+    .card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.94rem; }
+    .card .note { display: block; margin-top: 10px; font-size: 0.82rem; color: var(--purple); }
+
+    /* CASE */
+    .case-wrap {
+      display: grid; gap: 40px;
+      grid-template-columns: 1fr 1fr; align-items: center;
+    }
+    .case-text h2 { margin-bottom: 14px; }
+    .case-text p { color: var(--muted); margin-bottom: 14px; }
+    .case-list { list-style: none; margin: 18px 0 28px; display: grid; gap: 10px; }
+    .case-list li { display: flex; gap: 10px; color: var(--ice); font-size: 0.95rem; }
+    .case-list li::before { content: "▹"; color: var(--electric); }
+    .mockup {
+      background: #04121f;
+      border: 1px solid rgba(67, 141, 235, 0.25);
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .mockup-bar {
+      display: flex; gap: 6px; padding: 12px 14px;
+      background: rgba(67, 141, 235, 0.08);
+      border-bottom: 1px solid rgba(67, 141, 235, 0.15);
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: var(--coral); } .dot.y { background: var(--purple); } .dot.g { background: var(--electric); }
+    .mockup-body { padding: 22px; }
+    .mock-line { height: 10px; border-radius: 6px; background: rgba(157, 176, 200, 0.12); margin-bottom: 12px; }
+    .mock-line.w60 { width: 60%; } .mock-line.w40 { width: 40%; } .mock-line.w80 { width: 80%; }
+    .mock-line.accent { background: linear-gradient(90deg, var(--electric), var(--purple)); opacity: .7; }
+    .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+    .mock-tile {
+      height: 54px; border-radius: 8px;
+      background: rgba(67, 141, 235, 0.1);
+      border: 1px solid rgba(67, 141, 235, 0.2);
+    }
+
+    /* COMO FUNCIONA */
+    .steps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+    .step {
+      background: rgba(6, 26, 48, 0.5);
+      border: 1px solid rgba(67, 141, 235, 0.15);
+      border-radius: var(--radius); padding: 24px 20px;
+    }
+    .step .num {
+      font-size: 0.8rem; font-weight: 700; color: var(--electric);
+      letter-spacing: 0.1em; margin-bottom: 8px;
+    }
+    .step h3 { font-size: 1rem; margin-bottom: 6px; }
+    .step p { font-size: 0.86rem; color: var(--muted); }
+
+    /* SOBRE */
+    .about {
+      background: linear-gradient(160deg, rgba(6,26,48,0.6), rgba(2,15,31,0.6));
+      border-top: 1px solid rgba(67, 141, 235, 0.12);
+      border-bottom: 1px solid rgba(67, 141, 235, 0.12);
+    }
+    .about p { color: var(--muted); max-width: 680px; font-size: 1.02rem; }
+    .about strong { color: var(--ice); }
+
+    /* CONTATO */
+    .contact-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-top: 30px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 18px 20px; border-radius: var(--radius);
+      background: rgba(6, 26, 48, 0.6);
+      border: 1px solid rgba(67, 141, 235, 0.18);
+      color: var(--ice);
+    }
+    .contact-item:hover { border-color: var(--electric); }
+    .contact-item .ic { font-size: 1.2rem; color: var(--electric); }
+    .contact-item small { display: block; color: var(--muted); font-size: 0.76rem; }
+
+    /* FOOTER */
+    footer {
+      padding: 36px 0; text-align: center;
+      color: var(--muted); font-size: 0.84rem;
+      border-top: 1px solid rgba(67, 141, 235, 0.12);
+    }
+
+    /* WHATSAPP FIXO */
+    .wa-float {
+      position: fixed; right: 20px; bottom: 20px; z-index: 100;
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--royal), var(--electric));
+      display: grid; place-items: center;
+      box-shadow: 0 10px 28px rgba(67, 141, 235, 0.45);
+      transition: transform .2s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+    .wa-float svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* RESPONSIVO */
+    @media (max-width: 820px) {
+      .nav-links { display: none; }
+      .menu-toggle { display: block; }
+      .nav-links.open {
+        display: flex; flex-direction: column; gap: 16px;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--bg-soft); padding: 24px;
+        border-bottom: 1px solid rgba(67, 141, 235, 0.2);
+      }
+      .case-wrap { grid-template-columns: 1fr; }
+      section { padding: 60px 0; }
+      .hero { padding: 80px 0 70px; }
+    }
+  </style>
 </head>
 <body>
 
+<header>
+  <nav class="container">
+    <div class="brand">Mundo Digital <small>Jere</small></div>
+    <button class="menu-toggle" aria-label="Abrir menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">☰</button>
+    <div class="nav-links">
+      <a href="#servicos">Serviços</a>
+      <a href="#case">Case</a>
+      <a href="#processo">Como funciona</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </div>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Desenvolvimento independente · Jeremoabo/BA</span>
+    <h1>Sites e <span class="grad">sistemas web</span> sob medida para pequenos negócios.</h1>
+    <p>Do site institucional ao sistema de gestão — desenvolvido com cuidado, entregue funcionando.</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="https://wa.me/5575988371304?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Mundo%20Digital%20Jere%20e%20quero%20saber%20mais%20sobre%20sites%20e%20sistemas." target="_blank" rel="noopener">Falar no WhatsApp</a>
+      <a class="btn btn-ghost" href="#case">Ver case</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <span class="eyebrow">Serviços</span>
+    <h2>O que eu faço</h2>
+    <p class="section-sub">Foco em entregas bem feitas, com escopo claro e sem promessa que não dá pra cumprir.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </div>
+        <h3>Sites e landing pages</h3>
+        <p>Site institucional, portfólio, página de vendas. Rápido, responsivo e com identidade visual própria.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+        <h3>Pequenos sistemas web</h3>
+        <p>Gestão, cadastro, controle interno, dashboards. Sob medida pro seu processo, sem inflar escopo.</p>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+        </div>
+        <h3>Manutenção e evolução</h3>
+        <p>Correções, melhorias e novas funcionalidades em sistemas existentes.</p>
+        <span class="note">Inclui suporte ao sistema entregue.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE -->
+<section id="case">
+  <div class="container">
+    <div class="case-wrap">
+      <div class="case-text">
+        <span class="eyebrow">Case em destaque</span>
+        <h2>IntegraLis</h2>
+        <p>Sistema de integração laboratorial desenvolvido para laboratório de análises clínicas. Importa dados de equipamentos via CSV, personaliza os campos e exporta no formato desejado.</p>
+        <ul class="case-list">
+          <li>Importação de arquivos CSV de equipamentos</li>
+          <li>Personalização de campos e formatação</li>
+          <li>Exportação em múltiplos formatos</li>
+        </ul>
+        <a class="btn btn-primary" href="https://wa.me/5575988371304?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20saber%20mais%20sobre%20o%20IntegraLis." target="_blank" rel="noopener">Solicitar demonstração</a>
+      </div>
+      <div class="mockup" aria-hidden="true">
+        <div class="mockup-bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        </div>
+        <div class="mockup-body">
+          <div class="mock-line accent w40"></div>
+          <div class="mock-line w80"></div>
+          <div class="mock-line w60"></div>
+          <div class="mock-grid">
+            <div class="mock-tile"></div>
+            <div class="mock-tile"></div>
+            <div class="mock-tile"></div>
+            <div class="mock-tile"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="container">
+    <span class="eyebrow">Como funciona</span>
+    <h2>Do primeiro contato à entrega</h2>
+    <p class="section-sub">Processo simples, sem surpresa no meio do caminho.</p>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Conversa</h3><p>Entendo o que você precisa e o que dá pra fazer.</p></div>
+      <div class="step"><div class="num">02</div><h3>Proposta</h3><p>Escopo, prazo e valor definidos por escrito.</p></div>
+      <div class="step"><div class="num">03</div><h3>Protótipo</h3><p>Você aprova o visual antes do desenvolvimento.</p></div>
+      <div class="step"><div class="num">04</div><h3>Desenvolvimento</h3><p>Construção com acompanhamento e ajustes.</p></div>
+      <div class="step"><div class="num">05</div><h3>Entrega</h3><p>Publicado, testado e com suporte incluso.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="about">
+  <div class="container">
+    <span class="eyebrow">Sobre</span>
+    <h2>Quem está por trás</h2>
+    <p>Sou <strong>Ancelmo</strong>, desenvolvedor independente em <strong>Jeremoabo/BA</strong>. Trabalho com sites e pequenos sistemas web para negócios que precisam de solução prática, sem complicação. Criador do <strong>IntegraLis</strong>, sistema de integração laboratorial em uso por laboratório de análises clínicas.</p>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container">
+    <span class="eyebrow">Contato</span>
+    <h2>Vamos conversar</h2>
+    <p class="section-sub">Me chama no WhatsApp que a gente alinha seu projeto.</p>
+    <div class="contact-grid">
+      <a class="contact-item" href="https://wa.me/5575988371304?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Mundo%20Digital%20Jere." target="_blank" rel="noopener">
+        <span class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/>
+          </svg>
+        </span>
+        <span><small>WhatsApp</small>(75) 9 8837-1304</span>
+      </a>
+      <a class="contact-item" href="mailto:mundodigitaljere@gmail.com">
+        <span class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <path d="m22 7-10 5L2 7"></path>
+          </svg>
+        </span>
+        <span><small>E-mail</small>mundodigitaljere@gmail.com</span>
+      </a>
+      <a class="contact-item" href="https://github.com/AncelmoJR" target="_blank" rel="noopener">
+        <span class="ic">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </span>
+        <span><small>GitHub</small>github.com/AncelmoJR</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    © <span id="ano"></span> Mundo Digital Jere · Jeremoabo/BA
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5575988371304?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Mundo%20Digital%20Jere." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.2-.3.2-.5.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.2-.2-.5-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.4c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+</a>
+
+<script>
+  document.getElementById('ano').textContent = new Date().getFullYear();
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => document.querySelector('.nav-links').classList.remove('open'));
+  });
+</script>
 </body>
 </html>
